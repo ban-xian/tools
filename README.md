@@ -1,10 +1,27 @@
 # tools
 
-#### 介绍
+### 介绍
 
 一些项目开发通用工具方法&组件
 
-#### 使用说明
+### 使用说明
+
+#### Field
+
+表情包占用一个字符的输入框组件。
+
+目录：components/Field
+
+使用方法：
+1、复制该组件到项目
+2、引入该组件，具体参数参照 vant Field 组件
+
+```
+import Field from "@/components/Field/index.vue";
+<field v-model="testDate"> </field>
+```
+
+#### DatetimePicker
 
 适用于 vant4 的日期时间选择组件，使用该组件需安装 vant4，组件参数参照 vant3 DatetimePicker 组件。
 
@@ -19,11 +36,17 @@ import DatetimePicker from "@/components/DatetimePicker/index.vue";
 <datetime-picker v-model="testDate"> </datetime-picker>
 ```
 
-chartsExample 目录：echarts 复杂图表使用示例
+#### chartsExample 目录
 
-pay 目录：微信支付 PHP 后台代码
+echarts 复杂图表使用示例
 
-htmlToPdf.js：Vue 导出页面为 PDF
+#### pay 目录
+
+微信支付 PHP 后台代码
+
+#### htmlToPdf.js
+
+Vue 导出页面为 PDF
 
 ```
 <!-- 安装 html2Canvas、JsPDF -->
@@ -42,7 +65,9 @@ config={
 config可不传，不传为默认值
 ```
 
-gradientColor.js: 计算颜色渐变
+#### gradientColor.js
+
+计算颜色渐变
 
 ```
 直接调用gradientColor方法，传入步长、渐变开始颜色、渐变结束颜色，返回渐变颜色数组
