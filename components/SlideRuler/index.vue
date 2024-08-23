@@ -7,6 +7,11 @@
 import { onMounted, reactive } from 'vue'
 
 const props = defineProps({
+  // canvas id
+  canvasId: {
+    type: String,
+    default: 'canvasDom',
+  },
   // 尺子宽度
   canvasWidth: {
     type: Number,
@@ -122,7 +127,7 @@ const localState = reactive({
   touchPoints: [],
 })
 const initCanvas = () => {
-  canvas = document.querySelector('#canvasDom')
+  canvas = document.querySelector(`#${props.canvasId}`)
   handleDreawCanvas()
 }
 const handleDreawCanvas = () => {
@@ -315,7 +320,7 @@ onMounted(initCanvas)
     >
       <canvas
         class="m-[0_auto] p-0 block duration-300"
-        id="canvasDom"
+        :id="canvasId"
         :width="canvasWidth * 2"
         :height="canvasHeight * 2"
         :style="{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }"
