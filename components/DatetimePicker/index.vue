@@ -31,16 +31,12 @@ const props = defineProps({
 </script>
 
 <template>
-  <div>
-    <Component
-      :is="type === 'time' ? TimePicker : DatePicker"
-      v-bind="{ ...$attrs, ...props }"
-    >
-      <template v-for="name in Object.keys($slots)" :key="name" #[name]>
-        <slot :name></slot>
-      </template>
-    </Component>
-  </div>
+  <Component
+    :is="type === 'time' ? TimePicker : DatePicker"
+    v-bind="{ ...$attrs, ...props }"
+  >
+    <template v-for="name in Object.keys($slots)" :key="name" #[name]>
+      <slot :name></slot>
+    </template>
+  </Component>
 </template>
-
-<style lang="less" scoped></style>

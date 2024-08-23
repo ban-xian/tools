@@ -20,6 +20,7 @@ const props = defineProps({
   // 当前日期
   modelValue: {
     type: Date,
+    required: true,
     default: new Date()
   },
   // 最小日期
@@ -158,29 +159,39 @@ const originColumns = computed(() =>
 // 每一列显示的数据
 const columns = computed(() =>
   originColumns.value.map(column =>
-    column.values.map(value => attrs.formatter(column.type, value))
+    column.values.map(value => ({
+      ...value,
+      text: attrs.formatter(column.type, value.text)
+    }))
   )
 );
 // 更新当前选中日期
 const updateColumnValue = () => {
   const value = currentDate.value || props.minDate;
-  const { formatter } = attrs;
-  selectedValues.value = originColumns.value.map(column => {
-    switch (column.type) {
-      case "year":
-        return formatter("year", `${value.getFullYear()}`);
-      case "month":
-        return formatter("month", padZero(value.getMonth() + 1));
-      case "day":
-        return formatter("day", padZero(value.getDate()));
-      case "hour":
-        return formatter("hour", padZero(value.getHours()));
-      case "minute":
-        return formatter("minute", padZero(value.getMinutes()));
-      default:
-        return "";
-    }
-  });
+  selectedValues.value = [
+    `${value.getFullYear()}`,
+    padZero(value.getMonth() + 1),
+    padZero(value.getDate()),
+    padZero(value.getHours()),
+    padZero(value.getMinutes())
+  ];
+  // const { formatter } = attrs;
+  // selectedValues.value = originColumns.value.map(column => {
+  //   switch (column.type) {
+  //     case "year":
+  //       return formatter("year", `${value.getFullYear()}`);
+  //     case "month":
+  //       return formatter("month", padZero(value.getMonth() + 1));
+  //     case "day":
+  //       return formatter("day", padZero(value.getDate()));
+  //     case "hour":
+  //       return formatter("hour", padZero(value.getHours()));
+  //     case "minute":
+  //       return formatter("minute", padZero(value.getMinutes()));
+  //     default:
+  //       return "";
+  //   }
+  // });
   emit("update:modelValue", value);
 };
 // 更新当前日期
@@ -251,8 +262,8 @@ updateInnerValue();
   <van-picker
     v-model="selectedValues"
     :columns
-    @change="handleChange"
     v-bind="$attrs"
+    @change="handleChange"
   >
     <template v-for="name in Object.keys($slots)" :key="name" #[name]>
       <slot :name></slot>

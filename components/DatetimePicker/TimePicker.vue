@@ -139,8 +139,8 @@ updateInnerValue();
   <van-picker
     v-model="selectedValues"
     :columns
-    @change="handleChange"
     v-bind="$attrs"
+    @change="handleChange"
   >
     <template v-for="name in Object.keys($slots)" :key="name" #[name]>
       <slot :name></slot>
