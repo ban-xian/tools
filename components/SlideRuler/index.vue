@@ -189,20 +189,28 @@ const handleDreawCanvas = () => {
     // 画线到刻度高度，10的位数就加高
     context.lineTo(
       origin.x + (i - startValue / precision) * divide,
-      i % 10 === 0 ? heightDecimal : heightDigit,
+      i % 10 === 0 ? heightDecimal : heightDigit || heightDecimal,
     )
     context.lineWidth = lineWidth
     // 10的位数就加深
-    context.strokeStyle = i % 10 === 0 ? colorDecimal : colorDigit
+    context.strokeStyle = heightDigit ? (i % 10 === 0 ? colorDecimal : colorDigit) : colorDecimal
     context.stroke()
     // 描绘刻度值
     context.fillStyle = fontColor
     context.textAlign = 'center'
     context.textBaseline = 'top'
-    if (i % 10 === 0) {
-      context.font = `${fontSize}px Arial`
+    context.font = `${fontSize}px Arial`
+    if (heightDigit) {
+      if (i % 10 === 0) {
+        context.fillText(
+          Math.round(i / 10) / (derivative / 10),
+          origin.x + (i - startValue / precision) * divide,
+          fontMarginTop,
+        )
+      }
+    } else {
       context.fillText(
-        Math.round(i / 10) / (derivative / 10),
+        Math.round(i / 10 / (derivative / 10)),
         origin.x + (i - startValue / precision) * divide,
         fontMarginTop,
       )
