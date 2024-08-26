@@ -156,7 +156,7 @@ const handleDreawCanvas = () => {
         ? currentValue.value
         : maxValue
       : minValue
-  currentValue.value = (Math.round((currentValue.value * 10) / precision) * precision) / 10
+  currentValue.value = (Math.round((currentValue.value * 100) / precision) * precision) / 100
   emit('change', currentValue.value)
   let diffCurrentMin = ((currentValue.value - minValue) * divide) / precision,
     startValue = currentValue.value - Math.floor(canvasWidth / 2 / divide) * precision
