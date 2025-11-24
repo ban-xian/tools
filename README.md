@@ -6,6 +6,32 @@
 
 ### 使用说明
 
+#### Waterfall
+
+适用于 Vue3 的移动端瀑布流列表组件。
+
+目录：components/Waterfall
+
+使用方法：
+1、复制该组件到项目
+2、引入该组件
+
+```
+import Field from "@/components/Waterfall/index.vue";
+<Waterfall
+    :list="list"
+    hasImage
+    :has-next="hasNext"
+    :loading="loading"
+    :style="{ padding: '10px' }"
+    @load-more="loadMore"
+  >
+    <template #default="{ data, imageLoaded }">
+      <Card :data="data" @load="imageLoaded" />
+    </template>
+  </Waterfall>
+```
+
 #### getChineseNumber.js
 
 阿拉伯数字转中文数字
@@ -113,7 +139,3 @@ gradientColor(20,[138,208,136],[241,39,39])
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
-
-```
-
-```
